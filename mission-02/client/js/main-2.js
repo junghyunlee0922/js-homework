@@ -3,6 +3,7 @@ const ul = document.querySelector(".ul");
 const visualImage = document.querySelector(".visual img");
 const body = document.querySelector("body");
 const nickName = document.querySelector(".nickName");
+let audio;
 
 function handleClick(e) {
   e.preventDefault();
@@ -45,14 +46,14 @@ function setNameText(index) {
 
 // 오디오 변경.
 function setAudio(index) {
-  const audio = new Audio(
-    `./assets/audio/${data[index - 1]["name"].toLowerCase()}.m4a`
-  );
-  if (audio.playing()) {
+  if (audio && audio.isPlaying()) {
     audio.stop();
   }
+  audio = new AudioPlayer(
+    `./assets/audio/${data[index - 1]["name"].toLowerCase()}.m4a`
+  );
   audio.play();
-  audio.volume = 0.1;
+  audio.volume(0.1);
 }
 
 ul.addEventListener("click", handleClick);

@@ -74,6 +74,7 @@ const ul = document.querySelector(".ul");
 const visualImage = document.querySelector(".visual img");
 const body = document.querySelector("body");
 const nickName = document.querySelector(".nickName");
+let audio;
 ```
 
 ### 클릭 이벤트 함수
@@ -134,15 +135,26 @@ function setNameText(index) {
 
 ###오디오 함수
 
-audio.play() - 오디오 재생. audio.volume - 오디오 볼륨 조절.
+audio.play() - 오디오 재생. audio.volume - 오디오 볼륨 조절. if문으로 다른오디오가 실행중일때는 다른 오디오를 멈춘다.
 
 ```js
 // 오디오 함수
 function setAudio(index) {
-  const audio = new Audio(
+  if (audio && audio.isPlaying()) {
+    audio.stop();
+  }
+  audio = new AudioPlayer(
     `./assets/audio/${data[index - 1]["name"].toLowerCase()}.m4a`
   );
   audio.play();
-  audio.volume = 0.1;
+  audio.volume(0.1);
 }
+```
+
+###audio.js에 볼륨 조절을 위한 추가
+
+```js
+volume(n) {
+    this.#audio.volume = n;
+  }
 ```
