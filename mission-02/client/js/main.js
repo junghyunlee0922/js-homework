@@ -30,7 +30,7 @@ function handleClick(e) {
   // img 변경.
   const imgName = data[index - 1]["name"].toLowerCase();
   visualImage.src = `./assets/${imgName}.jpeg`;
-  visualImage.alt = data[index - 1].alt;
+  visualImage.alt = data[index - 1]["alt"];
 
   // background color 변경.
   body.style.background = `linear-gradient(to bottom, ${
